@@ -1,4 +1,3 @@
-// import { toast } from "react-toastify";
 import { SearchContainer, JobContainer } from "../components";
 import customFetch from "../utils/CustomFetch";
 import { useLoaderData } from "react-router-dom";

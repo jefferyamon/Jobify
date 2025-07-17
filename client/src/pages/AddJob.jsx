@@ -3,7 +3,7 @@ import { JOB_STATUS, JOB_TYPE } from "../../../utils/constants";
 import { Form, redirect, useOutletContext } from "react-router-dom";
 import { FormRow, FormRowSelect, SubmitBtn } from "../components";
 import customFetch from "../utils/CustomFetch";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export const action =
   (queryClient) =>
@@ -13,10 +13,10 @@ export const action =
     try {
       await customFetch.post("/jobs", data);
       queryClient.invalidateQueries(["jobs"]);
-      // toast.success('Job added successfully')
+      toast.success("Job added successfully");
       return redirect("all-jobs");
     } catch (error) {
-      // toast.error(error?.response?.data?.msg)
+      toast.error(error?.response?.data?.msg);
       return error;
     }
   };

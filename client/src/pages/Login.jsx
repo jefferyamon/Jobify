@@ -2,7 +2,7 @@ import { Form, Link, redirect, useNavigate } from "react-router-dom";
 import Wrapper from "../assets/wrappers/RegisterAndLoginPage";
 import { FormRow, Logo, SubmitBtn } from "../components";
 import customFetch from "../utils/CustomFetch";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export const action =
   (queryClient) =>
@@ -12,10 +12,10 @@ export const action =
     try {
       await customFetch.post("/auth/login", data);
       queryClient.invalidateQueries();
-      // toast.success("login successful");
+      toast.success("login successful");
       return redirect("/dashboard");
     } catch (error) {
-      // toast.error(error?.response?.data?.msg);
+      toast.error(error?.response?.data?.msg);
       return error;
     }
   };
@@ -29,10 +29,10 @@ const Login = () => {
     };
     try {
       await customFetch.post("/auth/login", data);
-      // toast.success('Take a test drive')
+      toast.success("Take a test drive");
       navigate("/dashboard");
     } catch (error) {
-      // toast.error(error?.response?.data?.msg);
+      toast.error(error?.response?.data?.msg);
     }
   };
   return (

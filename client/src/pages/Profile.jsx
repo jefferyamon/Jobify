@@ -2,7 +2,7 @@ import { FormRow, SubmitBtn } from "../components";
 import Wrapper from "../assets/wrappers/DashboardFormPage";
 import { useOutletContext, Form, redirect } from "react-router-dom";
 import customFetch from "../utils/CustomFetch";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export const action =
   (queryClient) =>
@@ -10,16 +10,16 @@ export const action =
     const formData = await request.formData();
     const file = formData.get("avatar");
     if (file && file.size > 500000) {
-      // toast.error('Image size too large')
+      toast.error("Image size too large");
       return null;
     }
     try {
       await customFetch.patch("/users/update-user", formData);
       queryClient.invalidateQueries(["user"]);
-      // toast.success('Profile updated successfully')
+      toast.success("Profile updated successfully");
       return redirect("/dashboard");
     } catch (error) {
-      // toast.error(error?.response?.data?.msg);
+      toast.error(error?.response?.data?.msg);
     }
     return null;
   };

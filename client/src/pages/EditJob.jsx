@@ -3,7 +3,7 @@ import Wrapper from "../assets/wrappers/DashboardFormPage";
 import { useLoaderData } from "react-router";
 import { JOB_STATUS, JOB_TYPE } from "../../../utils/constants";
 import { Form, redirect } from "react-router-dom";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import customFetch from "../utils/CustomFetch";
 import { useQuery } from "@tanstack/react-query";
 
@@ -24,7 +24,7 @@ export const loader =
       await queryClient.ensureQueryData(singleJobQuery(params.id));
       return params.id;
     } catch (error) {
-      // toast.error(error?.response?.data?.msg);
+      toast.error(error?.response?.data?.msg);
       return redirect("/dashboard/all-jobs");
     }
   };
@@ -37,10 +37,10 @@ export const action =
     try {
       await customFetch.patch(`/jobs/${params.id}`, data);
       queryClient.invalidateQueries(["jobs"]);
-      // toast.success("Job edited successfully");
+      toast.success("Job edited successfully");
       return redirect("/dashboard/all-jobs");
     } catch (error) {
-      // toast.error(error?.response?.data?.msg);
+      toast.error(error?.response?.data?.msg);
       return error;
     }
   };

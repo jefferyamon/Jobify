@@ -1,17 +1,11 @@
-import {
-  Outlet,
-  redirect,
-  useLoaderData,
-  useNavigate,
-  useNavigation,
-} from "react-router-dom";
+import { Outlet, redirect, useNavigate, useNavigation } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Dashboard";
 import { BigSidebar, Loading, Navbar, SmallSidebar } from "../components";
 import { createContext, useContext, useEffect, useState } from "react";
 import { checkDefaultTheme } from "../App";
 import customFetch from "../utils/CustomFetch";
 import { useQuery } from "@tanstack/react-query";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const userQuery = {
   queryKey: ["user"],
@@ -56,7 +50,7 @@ const DashboardLayout = ({ queryClient }) => {
     navigate("/");
     await customFetch.get("/auth/logout");
     queryClient.invalidateQueries();
-    // toast.success("logging out...");
+    toast.success("logging out...");
   };
 
   customFetch.interceptors.response.use(
