@@ -9,9 +9,13 @@ export const action = async ({ request }) => {
   const data = Object.fromEntries(formData);
   try {
     await CustomFetch.post("/auth/register", data);
+    console.log(data);
+
     toast.success("Registration successful");
     return redirect("/login");
   } catch (error) {
+    console.log(error);
+
     toast.error(error?.response?.data?.msg);
     // const message = error?.response?.data?.msg;
     // toast.error(typeof message === "string" ? message : "Something went wrong");
